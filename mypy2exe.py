@@ -17,7 +17,7 @@ setup(
 """
 #,fileOperation.py,sendMail.py
 
-setup(console=['dataOperation.py'],
+setup(console=['hello.py'],
       options={
         'py2exe': 
         {
