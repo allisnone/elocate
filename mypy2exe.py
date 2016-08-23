@@ -17,4 +17,12 @@ setup(
 """
 #,fileOperation.py,sendMail.py
 
-setup(console=['dataOperation.py'])
+setup(console=['dataOperation.py'],
+      options={
+        'py2exe': 
+        {
+            #'includes': ['lxml.etree', 'lxml._elementpath', 'gzip'],
+            'includes': ['gzip'],
+        }
+    }
+      )
