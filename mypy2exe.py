@@ -9,15 +9,15 @@ setup(
     options={
         'py2exe': 
         {
-            #'includes': ['lxml.etree', 'lxml._elementpath', 'gzip'],
-            'includes': ['gzip'],
+            'includes': ['lxml.etree', 'lxml._elementpath', 'gzip'],
+            #'includes': ['gzip'],
         }
     }
 )
 """
 #,fileOperation.py,sendMail.py
 
-setup(console=['hello.py'],
+setup(console=['dataOperation.py'],
       options={
         'py2exe': 
         {
@@ -26,3 +26,4 @@ setup(console=['hello.py'],
         }
     }
       )
+#"""
