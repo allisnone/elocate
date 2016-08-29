@@ -11,7 +11,7 @@ ROOT_DIR="C:/BarScannerExcels/"
 """
 
 #ROOT_DIR="/storage/emulated/0/BarScannerExcels/"
-def get_all_scan_file(given_dir="C:/BarScannerExcels/data",key_word='BarScan',file_type='.xls'):
+def get_all_scan_file(given_dir="C:/BarScannerExcels/data/",key_word='BarScan',file_type='.xls'):
     """
         获取特定目录的最新扫描文件名
     """
@@ -118,10 +118,10 @@ def compare_scan_data(new_scan_data,history_bar_data):
                     if update_data.at[bams,col] != -1 and history_bar_data.at[bams,col]!=update_data.at[bams,col]:
                         history_bar_data.at[bams,col]=update_data.at[bams,col]
             #history_bar_data=history_bar_data.drop(update_existing_barms)
-        print('history_bar_data: \n',history_bar_data)
-        print('new_insert_data: \n',new_insert_data)
+        #print('history_bar_data: \n',history_bar_data)
+        #print('new_insert_data: \n',new_insert_data)
         updated_history_bar_data=pd.concat([history_bar_data,new_insert_data],ignore_index=False)
-        print('updated_history_bar_data \n',updated_history_bar_data)
+        #print('updated_history_bar_data \n',updated_history_bar_data)
         updated_history_bar_data=updated_history_bar_data.sort_index()[update_column_list]
         update_data=updated_history_bar_data[updated_history_bar_data.index.isin(update_barms)][update_column_list]
         #print(update_data[[' GDNTAsset',' SN', ' PEC','FrameRackPosition',' SiteLocation']])
@@ -274,17 +274,45 @@ def test():
     #raw_db_file_name="C:/BarScannerExcels/hist/CGC_asset.xls"
     #history_bar_data.to_excel(raw_db_file_name)
     eqm_data=get_eqm_data()
-    print(eqm_data)
-    print(eqm_data.columns.values.tolist())
-    #print(history_bar_data)
+    #print(eqm_data.tail(5))
+    update_column_list=[' GDNTAsset',' SN', ' PEC','FrameRackPosition',' SiteLocation']
+    eqm_data['site code'] = '/CNGN18'
+    eqm_data[' GDNTAsset'] = eqm_data['BAMS ID']
+    eqm_data[' SN'] = eqm_data['Ericsson SN']
+    eqm_data[' PEC'] =eqm_data['Product No']
+    eqm_data['FrameRackPosition'] = eqm_data['site code'] + eqm_data['Cabinet Position']
+    eqm_data[' SiteLocation'] = 'NA'
+    #print(eqm_data.columns.values.tolist())
+    eqm_data_temp = eqm_data[[' GDNTAsset',' SN', ' PEC','FrameRackPosition',' SiteLocation']]
+    eqm_data_temp = eqm_data_temp.set_index(' GDNTAsset')
+    print(eqm_data_temp)
     ROOT_DIR="C:/BarScannerExcels/"
     bar_data_df = consolidate_scan_data(ROOT_DIR+'data/')
     print('Scanning data:')  
     print(bar_data_df)
-    update_data,updated_history_bar_data = compare_scan_data(bar_data_df,history_bar_data)
+    update_data,updated_history_bar_data = compare_scan_data(bar_data_df,eqm_data_temp)
     print('Compare new scan data with DB raw data')
+    print('update data: \n',update_data )
+    print('updated history data: \n', updated_history_bar_data)
     update_data_file_name = 'C:/BarScannerExcels/temp/updated_scan_data.xls'
     final_db_data_file_name = 'C:/BarScannerExcels/temp/db_data.xls'
+    """
+    #update_data['site code'] = '/CNGN18'
+    update_data['BAMS ID'] = update_data[' GDNTAsset']
+    update_data['Ericsson SN'] = update_data[' SN']
+    update_data['Product No'] = update_data[' PEC']
+    update_data['Cabinet Position'] = update_data['FrameRackPosition']#= eqm_data['site code'] 
+    for  column in [' SN', ' PEC','FrameRackPosition',' SiteLocation']:
+        del update_data[column]
+    """
+    update_data = update_data.rename(index=str,columns={' SN':'Ericsson SN', ' PEC': 'Product No','FrameRackPosition': 'Cabinet Position',' SiteLocation':' SiteLocation'})#{' GDNTAsset',' SN', ' PEC','FrameRackPosition',' SiteLocation'})
+    
+    del update_data[' GDNTAsset']
+    del update_data[' SiteLocation']
+    update_data['BAMS ID'] = update_data.index
+    update_data = update_data.set_index('BAMS ID')
+    print(update_data)
+    
     
     #asset_prime = 'anna.chen@ericsson.com'
     #asset_prime = 'tony.cao@ericsson.com'
