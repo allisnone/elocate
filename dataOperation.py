@@ -343,7 +343,5 @@ def test():
         print('Send the new scan data to asset prime completed.')
 
 
-
-
 test()
 #consolidate_scan_data()
