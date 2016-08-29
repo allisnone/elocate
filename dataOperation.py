@@ -262,7 +262,7 @@ def get_gims_data():
 def update_eqm_sn_from_gims():
     return
 
-def test():
+if __name__ == "__main__":
     history_bar_data=pd.DataFrame({' NTAsset': ['BAMS-1001068584','BAMS-1001068511','BAMS-1001068512','BAMS-1001068513'],
                                    ' GDNTAsset': ['CO12034450','CO12034451','CO12034452','CO12034453'],
                                    ' SN': ['NNTM000078J0','NNTM000078J1','NNTM000078J2','NNTM000078J3'], 
@@ -343,5 +343,5 @@ def test():
         print('Send the new scan data to asset prime completed.')
 
 
-test()
+#test()
 #consolidate_scan_data()
