@@ -292,8 +292,8 @@ def test():
     print(bar_data_df)
     update_data,updated_history_bar_data = compare_scan_data(bar_data_df,eqm_data_temp)
     print('Compare new scan data with DB raw data')
-    print('update data: \n',update_data )
-    print('updated history data: \n', updated_history_bar_data)
+    
+    #print('updated history data: \n', updated_history_bar_data)
     update_data_file_name = 'C:/BarScannerExcels/temp/updated_scan_data.xls'
     final_db_data_file_name = 'C:/BarScannerExcels/temp/db_data.xls'
     """
@@ -311,8 +311,9 @@ def test():
     del update_data[' SiteLocation']
     update_data['BAMS ID'] = update_data.index
     update_data = update_data.set_index('BAMS ID')
-    print(update_data)
-    
+    #print(update_data)
+    print('Final data need to update: ')
+    print(update_data )
     
     #asset_prime = 'anna.chen@ericsson.com'
     #asset_prime = 'tony.cao@ericsson.com'
