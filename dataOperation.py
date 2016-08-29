@@ -315,9 +315,9 @@ if __name__ == "__main__":
     print('Final data need to update: ')
     print(update_data )
     
-    #asset_prime = 'anna.chen@ericsson.com'
+    asset_prime = 'anna.chen@ericsson.com'
     #asset_prime = 'tony.cao@ericsson.com'
-    asset_prime = 'jason.g.zhang@ericsson.com'
+    #asset_prime = 'jason.g.zhang@ericsson.com'
     #copy_addr='PDLEENGSDG@pdl.internal.ericsson.com'
     #copy_addr = ['jason.g.zhang@ericsson.com','tony.cao@ericsson.com']
     copy_addr = 'jason.g.zhang@ericsson.com'
