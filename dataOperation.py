@@ -279,13 +279,13 @@ if __name__ == "__main__":
     eqm_data['site code'] = '/CNGN18'
     eqm_data[' GDNTAsset'] = eqm_data['BAMS ID']
     eqm_data[' SN'] = eqm_data['Ericsson SN']
-    eqm_data[' PEC'] =eqm_data['Product No']
+    eqm_data[' PEC'] = eqm_data['Product No']
     eqm_data['FrameRackPosition'] = eqm_data['site code'] + eqm_data['Cabinet Position']
     eqm_data[' SiteLocation'] = 'NA'
     #print(eqm_data.columns.values.tolist())
     eqm_data_temp = eqm_data[[' GDNTAsset',' SN', ' PEC','FrameRackPosition',' SiteLocation']]
     eqm_data_temp = eqm_data_temp.set_index(' GDNTAsset')
-    print(eqm_data_temp)
+    #print(eqm_data_temp)
     ROOT_DIR="C:/BarScannerExcels/"
     bar_data_df = consolidate_scan_data(ROOT_DIR+'data/')
     print('Scanning data:')  
