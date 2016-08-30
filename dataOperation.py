@@ -26,7 +26,7 @@ def get_all_scan_file(given_dir="C:/BarScannerExcels/data/",key_word='BarScan',f
         if root==given_dir:
             for file in allfiles:
                 if key_word in file and file_type in file:
-                    print(given_dir,file)
+                    #print(given_dir,file)
                     all_file_names.append(given_dir+file)
     all_file_names=sorted(all_file_names,reverse=True)
     return all_file_names
@@ -289,8 +289,8 @@ if __name__ == "__main__":
     #print(eqm_data_temp)
     ROOT_DIR="C:/BarScannerExcels/"
     bar_data_df = consolidate_scan_data(ROOT_DIR+'data/')
-    print('Scanning data:')  
-    print(bar_data_df)
+    print('Scanning data...')  
+    #print(bar_data_df)
     update_data,updated_history_bar_data = compare_scan_data(bar_data_df,eqm_data_temp)
     print('Compare new scan data with DB raw data')
     
@@ -318,7 +318,7 @@ if __name__ == "__main__":
     
     asset_prime = 'anna.chen@ericsson.com'
     #asset_prime = 'tony.cao@ericsson.com'
-    #asset_prime = 'jason.g.zhang@ericsson.com'
+    asset_prime = 'jason.g.zhang@ericsson.com'
     #copy_addr='PDLEENGSDG@pdl.internal.ericsson.com'
     #copy_addr = ['jason.g.zhang@ericsson.com','tony.cao@ericsson.com']
     copy_addr = 'jason.g.zhang@ericsson.com'
