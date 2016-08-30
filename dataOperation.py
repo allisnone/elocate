@@ -26,6 +26,7 @@ def get_all_scan_file(given_dir="C:/BarScannerExcels/data/",key_word='BarScan',f
         if root==given_dir:
             for file in allfiles:
                 if key_word in file and file_type in file:
+                    print(given_dir,file)
                     all_file_names.append(given_dir+file)
     all_file_names=sorted(all_file_names,reverse=True)
     return all_file_names
@@ -41,7 +42,7 @@ def get_scan_data(column,given_file_name=None,given_dir="C:/BarScannerExcels/",k
     :return: dataframe type, scanned data
     """
     bar_data_df=pd.DataFrame(data={},columns=column)
-    allfiles=get_all_scan_file()
+    allfiles=[]#get_all_scan_file()
     file_name=''
     if given_file_name:
         file_name=given_file_name
@@ -58,14 +59,14 @@ def get_scan_data(column,given_file_name=None,given_dir="C:/BarScannerExcels/",k
         else:
             pass
     if file_name and file_type=='.xls':
-        try: 
+        if True: 
             raw_bar_data_df=pd.read_excel(file_name,header=0,encoding='gb2312')
             #df_0=pd.read_csv(file_name,names=column_list, header=0,encoding='gb2312')#'utf-8')   #for python3
             #print(file_name)
             bar_data_df=raw_bar_data_df[column]
             #print(bar_data_df)
             bar_data_df=bar_data_df.set_index(' NTAsset')
-        except:
+        else:
             print('file: %s does not exist...' % file_name)
             pass
     elif file_name and file_type=='.csv':
